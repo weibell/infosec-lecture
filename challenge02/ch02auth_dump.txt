@@ -1,0 +1,255 @@
+$ radare2 -A ch02auth 
+[Invalid instruction of 16151 bytes at 0x130 entry0 (aa)
+Invalid instruction of 16361 bytes at 0x19
+[x] Analyze all flags starting with sym. and entry0 (aa)
+[Invalid instruction of 990 bytes at 0x1cb
+[x] Analyze function calls (aac)
+[x] Analyze len bytes of instructions for references (aar)
+[x] Constructing a function name for fcn.* and sym.func.* functions (aan)
+[x] Type matching analysis for all functions (afta)
+[x] Use -AA or aaaa to perform additional experimental analysis.
+[0x00000730]> s main
+[0x00000860]> pdf
+/ (fcn) main 770
+|   main (int argc, char **argv, char **envp);
+|           ; var char *s2 @ rbp-0xef
+|           ; var char *local_e0h @ rbp-0xe0
+|           ; var char *local_c0h @ rbp-0xc0
+|           ; var char *local_a0h @ rbp-0xa0
+|           ; var char *s @ rbp-0x70
+|           ; var char *s1 @ rbp-0x40
+|           ; var size_t local_10h @ rbp-0x10
+|           ; var char *local_8h @ rbp-0x8
+|           ; arg int arg_40h @ rbp+0x40
+|           ; arg int arg_70h @ rbp+0x70
+|           ; arg int arg_a0h @ rbp+0xa0
+|           ; DATA XREF from entry0 (0x74d)
+|           0x00000860      55             push rbp
+|           0x00000861      4889e5         mov rbp, rsp
+|           0x00000864      4881ecf00000.  sub rsp, 0xf0
+|           0x0000086b      488d8540ffff.  lea rax, qword [local_c0h]
+|           0x00000872      c7002e627373   mov dword [rax], 0x7373622e ; '.bss' ; [0x7373622e:4]=-1
+|           0x00000878      66c740043200   mov word [rax + 4], 0x32    ; '2' ; [0x32:2]=0
+|           0x0000087e      488d8520ffff.  lea rax, qword [local_e0h]
+|           0x00000885      c70074657374   mov dword [rax], 0x74736574 ; 'test' ; [0x74736574:4]=-1
+|           0x0000088b      c6400400       mov byte [rax + 4], 0
+|           0x0000088f      488d8511ffff.  lea rax, qword [s2]
+|           0x00000896      c70035383230   mov dword [rax], 0x30323835 ; '5820' ; [0x30323835:4]=-1
+|           0x0000089c      c6400400       mov byte [rax + 4], 0
+|           0x000008a0      488d8d11ffff.  lea rcx, qword [s2]
+|           0x000008a7      488d8511ffff.  lea rax, qword [s2]
+|           0x000008ae      ba02000000     mov edx, 2                  ; size_t n
+|           0x000008b3      4889ce         mov rsi, rcx                ; const char *s2
+|           0x000008b6      4889c7         mov rdi, rax                ; char *s1
+|           0x000008b9      e842feffff     call sym.imp.strncat        ; char *strncat(char *s1, const char *s2, size_t n)
+|           0x000008be      488d8d11ffff.  lea rcx, qword [s2]
+|           0x000008c5      488d8511ffff.  lea rax, qword [s2]
+|           0x000008cc      ba01000000     mov edx, 1                  ; size_t n
+|           0x000008d1      4889ce         mov rsi, rcx                ; const char *s2
+|           0x000008d4      4889c7         mov rdi, rax                ; char *s1
+|           0x000008d7      e824feffff     call sym.imp.strncat        ; char *strncat(char *s1, const char *s2, size_t n)
+|           0x000008dc      488d8d11ffff.  lea rcx, qword [s2]
+|           0x000008e3      488d8511ffff.  lea rax, qword [s2]
+|           0x000008ea      ba03000000     mov edx, 3                  ; size_t n
+|           0x000008ef      4889ce         mov rsi, rcx                ; const char *s2
+|           0x000008f2      4889c7         mov rdi, rax                ; char *s1
+|           0x000008f5      e806feffff     call sym.imp.strncat        ; char *strncat(char *s1, const char *s2, size_t n)
+|           0x000008fa      488d05630300.  lea rax, qword str.Title    ; 0xc64 ; "Title"
+|           0x00000901      488945f8       mov qword [local_8h], rax
+|           0x00000905      488d3d5e0300.  lea rdi, qword str.Enter_the_password: ; 0xc6a ; "\nEnter the password: " ; const char *s
+|           0x0000090c      e8bffdffff     call sym.imp.puts           ; int puts(const char *s)
+|           0x00000911      488b15481720.  mov rdx, qword [obj.stdin__GLIBC_2.2.5] ; [0x202060:8]=0 ; FILE *stream
+|           0x00000918      488d45c0       lea rax, qword [s1]
+|           0x0000091c      be28000000     mov esi, 0x28               ; '(' ; int size
+|           0x00000921      4889c7         mov rdi, rax                ; char *s
+|           0x00000924      e8e7fdffff     call sym.imp.fgets          ; char *fgets(char *s, int size, FILE *stream)
+|           0x00000929      488d45c0       lea rax, qword [s1]
+|           0x0000092d      4889c7         mov rdi, rax                ; const char *s
+|           0x00000930      e8abfdffff     call sym.imp.strlen         ; size_t strlen(const char *s)
+|           0x00000935      488945f0       mov qword [local_10h], rax
+|           0x00000939      48837df000     cmp qword [local_10h], 0
+|       ,=< 0x0000093e      7424           je 0x964
+|       |   0x00000940      488b45f0       mov rax, qword [local_10h]
+|       |   0x00000944      4883e801       sub rax, 1
+|       |   0x00000948      0fb64405c0     movzx eax, byte [s1 + rax]
+|       |   0x0000094d      3c0a           cmp al, 0xa
+|      ,==< 0x0000094f      7513           jne 0x964
+|      ||   0x00000951      48836df001     sub qword [local_10h], 1
+|      ||   0x00000956      488d55c0       lea rdx, qword [s1]
+|      ||   0x0000095a      488b45f0       mov rax, qword [local_10h]
+|      ||   0x0000095e      4801d0         add rax, rdx                ; '('
+|      ||   0x00000961      c60000         mov byte [rax], 0
+|      ||   ; CODE XREFS from main (0x93e, 0x94f)
+|      ``-> 0x00000964      488b4df8       mov rcx, qword [local_8h]
+|           0x00000968      488d45c0       lea rax, qword [s1]
+|           0x0000096c      ba28000000     mov edx, 0x28               ; '(' ; size_t n
+|           0x00000971      4889ce         mov rsi, rcx                ; const char *s2
+|           0x00000974      4889c7         mov rdi, rax                ; const char *s1
+|           0x00000977      e844fdffff     call sym.imp.strncmp        ; int strncmp(const char *s1, const char *s2, size_t n)
+|           0x0000097c      85c0           test eax, eax
+|       ,=< 0x0000097e      0f85cb010000   jne 0xb4f
+|       |   0x00000984      488b4df8       mov rcx, qword [local_8h]
+|       |   0x00000988      488d8540ffff.  lea rax, qword [local_c0h]
+|       |   0x0000098f      ba04000000     mov edx, 4                  ; size_t n
+|       |   0x00000994      4889ce         mov rsi, rcx                ; const char *s2
+|       |   0x00000997      4889c7         mov rdi, rax                ; char *s1
+|       |   0x0000099a      e861fdffff     call sym.imp.strncat        ; char *strncat(char *s1, const char *s2, size_t n)
+|       |   0x0000099f      488d3dda0200.  lea rdi, qword str.Enter_the_second_password: ; 0xc80 ; "\nEnter the second password: " ; const char *s
+|       |   0x000009a6      e825fdffff     call sym.imp.puts           ; int puts(const char *s)
+|       |   0x000009ab      488b15ae1620.  mov rdx, qword [obj.stdin__GLIBC_2.2.5] ; [0x202060:8]=0 ; FILE *stream
+|       |   0x000009b2      488d4590       lea rax, qword [s]
+|       |   0x000009b6      be28000000     mov esi, 0x28               ; '(' ; int size
+|       |   0x000009bb      4889c7         mov rdi, rax                ; char *s
+|       |   0x000009be      e84dfdffff     call sym.imp.fgets          ; char *fgets(char *s, int size, FILE *stream)
+|       |   0x000009c3      488d4590       lea rax, qword [s]
+|       |   0x000009c7      4889c7         mov rdi, rax                ; const char *s
+|       |   0x000009ca      e811fdffff     call sym.imp.strlen         ; size_t strlen(const char *s)
+|       |   0x000009cf      488945f0       mov qword [local_10h], rax
+|       |   0x000009d3      48837df000     cmp qword [local_10h], 0
+|      ,==< 0x000009d8      7424           je 0x9fe
+|      ||   0x000009da      488b45f0       mov rax, qword [local_10h]
+|      ||   0x000009de      4883e801       sub rax, 1
+|      ||   0x000009e2      0fb6440590     movzx eax, byte [s + rax]
+|      ||   0x000009e7      3c0a           cmp al, 0xa
+|     ,===< 0x000009e9      7513           jne 0x9fe
+|     |||   0x000009eb      48836df001     sub qword [local_10h], 1
+|     |||   0x000009f0      488d5590       lea rdx, qword [s]
+|     |||   0x000009f4      488b45f0       mov rax, qword [local_10h]
+|     |||   0x000009f8      4801d0         add rax, rdx                ; '('
+|     |||   0x000009fb      c60000         mov byte [rax], 0
+|     |||   ; CODE XREFS from main (0x9d8, 0x9e9)
+|     ``--> 0x000009fe      488d8d40ffff.  lea rcx, qword [local_c0h]
+|       |   0x00000a05      488d4590       lea rax, qword [s]
+|       |   0x00000a09      ba28000000     mov edx, 0x28               ; '(' ; size_t n
+|       |   0x00000a0e      4889ce         mov rsi, rcx                ; const char *s2
+|       |   0x00000a11      4889c7         mov rdi, rax                ; const char *s1
+|       |   0x00000a14      e8a7fcffff     call sym.imp.strncmp        ; int strncmp(const char *s1, const char *s2, size_t n)
+|       |   0x00000a19      85c0           test eax, eax
+|      ,==< 0x00000a1b      0f8520010000   jne 0xb41
+|      ||   0x00000a21      488d8d40ffff.  lea rcx, qword [local_c0h]
+|      ||   0x00000a28      488d8520ffff.  lea rax, qword [local_e0h]
+|      ||   0x00000a2f      ba04000000     mov edx, 4                  ; size_t n
+|      ||   0x00000a34      4889ce         mov rsi, rcx                ; const char *s2
+|      ||   0x00000a37      4889c7         mov rdi, rax                ; char *s1
+|      ||   0x00000a3a      e8c1fcffff     call sym.imp.strncat        ; char *strncat(char *s1, const char *s2, size_t n)
+|      ||   0x00000a3f      488d8d20ffff.  lea rcx, qword [local_e0h]
+|      ||   0x00000a46      488d8520ffff.  lea rax, qword [local_e0h]
+|      ||   0x00000a4d      ba02000000     mov edx, 2                  ; size_t n
+|      ||   0x00000a52      4889ce         mov rsi, rcx                ; const char *s2
+|      ||   0x00000a55      4889c7         mov rdi, rax                ; char *s1
+|      ||   0x00000a58      e8a3fcffff     call sym.imp.strncat        ; char *strncat(char *s1, const char *s2, size_t n)
+|      ||   0x00000a5d      488b4df8       mov rcx, qword [local_8h]
+|      ||   0x00000a61      488d8520ffff.  lea rax, qword [local_e0h]
+|      ||   0x00000a68      ba01000000     mov edx, 1                  ; size_t n
+|      ||   0x00000a6d      4889ce         mov rsi, rcx                ; const char *s2
+|      ||   0x00000a70      4889c7         mov rdi, rax                ; char *s1
+|      ||   0x00000a73      e888fcffff     call sym.imp.strncat        ; char *strncat(char *s1, const char *s2, size_t n)
+|      ||   0x00000a78      488d3d1e0200.  lea rdi, qword str.Enter_the_third_password: ; 0xc9d ; "\nEnter the third password: " ; const char *s
+|      ||   0x00000a7f      e84cfcffff     call sym.imp.puts           ; int puts(const char *s)
+|      ||   0x00000a84      488b15d51520.  mov rdx, qword [obj.stdin__GLIBC_2.2.5] ; [0x202060:8]=0 ; FILE *stream
+|      ||   0x00000a8b      488d8560ffff.  lea rax, qword [local_a0h]
+|      ||   0x00000a92      be28000000     mov esi, 0x28               ; '(' ; int size
+|      ||   0x00000a97      4889c7         mov rdi, rax                ; char *s
+|      ||   0x00000a9a      e871fcffff     call sym.imp.fgets          ; char *fgets(char *s, int size, FILE *stream)
+|      ||   0x00000a9f      488d8560ffff.  lea rax, qword [local_a0h]
+|      ||   0x00000aa6      4889c7         mov rdi, rax                ; const char *s
+|      ||   0x00000aa9      e832fcffff     call sym.imp.strlen         ; size_t strlen(const char *s)
+|      ||   0x00000aae      488945f0       mov qword [local_10h], rax
+|      ||   0x00000ab2      48837df000     cmp qword [local_10h], 0
+|     ,===< 0x00000ab7      742a           je 0xae3
+|     |||   0x00000ab9      488b45f0       mov rax, qword [local_10h]
+|     |||   0x00000abd      4883e801       sub rax, 1
+|     |||   0x00000ac1      0fb6840560ff.  movzx eax, byte [local_a0h + rax]
+|     |||   0x00000ac9      3c0a           cmp al, 0xa
+|    ,====< 0x00000acb      7516           jne 0xae3
+|    ||||   0x00000acd      48836df001     sub qword [local_10h], 1
+|    ||||   0x00000ad2      488d9560ffff.  lea rdx, qword [local_a0h]
+|    ||||   0x00000ad9      488b45f0       mov rax, qword [local_10h]
+|    ||||   0x00000add      4801d0         add rax, rdx                ; '('
+|    ||||   0x00000ae0      c60000         mov byte [rax], 0
+|    ||||   ; CODE XREFS from main (0xab7, 0xacb)
+|    ``---> 0x00000ae3      488d8d20ffff.  lea rcx, qword [local_e0h]
+|      ||   0x00000aea      488d8560ffff.  lea rax, qword [local_a0h]
+|      ||   0x00000af1      ba28000000     mov edx, 0x28               ; '('
+|      ||   0x00000af6      4889ce         mov rsi, rcx
+|      ||   0x00000af9      4889c7         mov rdi, rax
+|      ||   0x00000afc      b800000000     mov eax, 0
+|      ||   0x00000b01      e85c000000     call sym.checker
+|      ||   0x00000b06      85c0           test eax, eax
+|     ,===< 0x00000b08      7429           je 0xb33
+|     |||   0x00000b0a      488d3da80100.  lea rdi, qword str.Congratulations ; 0xcb9 ; "\nCongratulations" ; const char *s
+|     |||   0x00000b11      e8bafbffff     call sym.imp.puts           ; int puts(const char *s)
+|     |||   0x00000b16      488d8511ffff.  lea rax, qword [s2]
+|     |||   0x00000b1d      4889c6         mov rsi, rax
+|     |||   0x00000b20      488d3da30100.  lea rdi, qword str.Flag:__s ; 0xcca ; "Flag: %s\n" ; const char *format
+|     |||   0x00000b27      b800000000     mov eax, 0
+|     |||   0x00000b2c      e8bffbffff     call sym.imp.printf         ; int printf(const char *format)
+|    ,====< 0x00000b31      eb28           jmp 0xb5b
+|    |`---> 0x00000b33      488d3d9a0100.  lea rdi, qword str.Wrong_Password ; 0xcd4 ; "\nWrong Password " ; const char *s
+|    | ||   0x00000b3a      e891fbffff     call sym.imp.puts           ; int puts(const char *s)
+|    |,===< 0x00000b3f      eb1a           jmp 0xb5b
+|    ||||   ; CODE XREF from main (0xa1b)
+|    ||`--> 0x00000b41      488d3d8c0100.  lea rdi, qword str.Wrong_Password ; 0xcd4 ; "\nWrong Password " ; const char *s
+|    || |   0x00000b48      e883fbffff     call sym.imp.puts           ; int puts(const char *s)
+|    ||,==< 0x00000b4d      eb0c           jmp 0xb5b
+|    ||||   ; CODE XREF from main (0x97e)
+|    |||`-> 0x00000b4f      488d3d7e0100.  lea rdi, qword str.Wrong_Password ; 0xcd4 ; "\nWrong Password " ; const char *s
+|    |||    0x00000b56      e875fbffff     call sym.imp.puts           ; int puts(const char *s)
+|    |||    ; CODE XREFS from main (0xb31, 0xb3f, 0xb4d)
+|    ```--> 0x00000b5b      b800000000     mov eax, 0
+|           0x00000b60      c9             leave
+\           0x00000b61      c3             ret
+[0x00000860]> s sym.checker
+[0x00000b62]> pdf
+/ (fcn) sym.checker 122
+|   sym.checker (char *arg1, char *arg2);
+|           ; var char *local_20h @ rbp-0x20
+|           ; var char *local_18h @ rbp-0x18
+|           ; var int local_8h @ rbp-0x8
+|           ; var int local_4h @ rbp-0x4
+|           ; arg char *arg1 @ rdi
+|           ; arg char *arg2 @ rsi
+|           ; CALL XREF from main (0xb01)
+|           0x00000b62      55             push rbp
+|           0x00000b63      4889e5         mov rbp, rsp
+|           0x00000b66      48897de8       mov qword [local_18h], rdi  ; arg1
+|           0x00000b6a      488975e0       mov qword [local_20h], rsi  ; arg2
+|           0x00000b6e      c745f8010000.  mov dword [local_8h], 1
+|           0x00000b75      c745fc000000.  mov dword [local_4h], 0
+|       ,=< 0x00000b7c      eb31           jmp 0xbaf
+|       |   ; CODE XREFS from sym.checker (0xbc1, 0xbd5)
+|     ..--> 0x00000b7e      8b45fc         mov eax, dword [local_4h]
+|     ::|   0x00000b81      4863d0         movsxd rdx, eax
+|     ::|   0x00000b84      488b45e8       mov rax, qword [local_18h]
+|     ::|   0x00000b88      4801d0         add rax, rdx                ; '('
+|     ::|   0x00000b8b      0fb610         movzx edx, byte [rax]
+|     ::|   0x00000b8e      8b45fc         mov eax, dword [local_4h]
+|     ::|   0x00000b91      4863c8         movsxd rcx, eax
+|     ::|   0x00000b94      488b45e0       mov rax, qword [local_20h]
+|     ::|   0x00000b98      4801c8         add rax, rcx                ; '&'
+|     ::|   0x00000b9b      0fb600         movzx eax, byte [rax]
+|     ::|   0x00000b9e      38c2           cmp dl, al
+|    ,====< 0x00000ba0      7409           je 0xbab
+|    |::|   0x00000ba2      c745f8000000.  mov dword [local_8h], 0
+|   ,=====< 0x00000ba9      eb2c           jmp 0xbd7
+|   ||::|   ; CODE XREF from sym.checker (0xba0)
+|   |`----> 0x00000bab      8345fc01       add dword [local_4h], 1
+|   | ::|   ; CODE XREF from sym.checker (0xb7c)
+|   | ::`-> 0x00000baf      8b45fc         mov eax, dword [local_4h]
+|   | ::    0x00000bb2      4863d0         movsxd rdx, eax
+|   | ::    0x00000bb5      488b45e8       mov rax, qword [local_18h]
+|   | ::    0x00000bb9      4801d0         add rax, rdx                ; '('
+|   | ::    0x00000bbc      0fb600         movzx eax, byte [rax]
+|   | ::    0x00000bbf      84c0           test al, al
+|   | `===< 0x00000bc1      75bb           jne 0xb7e
+|   |  :    0x00000bc3      8b45fc         mov eax, dword [local_4h]
+|   |  :    0x00000bc6      4863d0         movsxd rdx, eax
+|   |  :    0x00000bc9      488b45e0       mov rax, qword [local_20h]
+|   |  :    0x00000bcd      4801d0         add rax, rdx                ; '('
+|   |  :    0x00000bd0      0fb600         movzx eax, byte [rax]
+|   |  :    0x00000bd3      84c0           test al, al
+|   |  `==< 0x00000bd5      75a7           jne 0xb7e
+|   |       ; CODE XREF from sym.checker (0xba9)
+|   `-----> 0x00000bd7      8b45f8         mov eax, dword [local_8h]
+|           0x00000bda      5d             pop rbp
+\           0x00000bdb      c3             ret
