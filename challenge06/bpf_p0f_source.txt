@@ -1,0 +1,78 @@
+; ip: ip version
+; ((ip[0] & 0xf) == 5): IP options len == 0
+; (tcp[14:2] == 512): win size == 512
+; ((tcp[12] >> 4) == 5): TCP data offset
+; ((ip[6] & 0x80) == 0): mbz zero
+; ((ip[2:2] - ((ip[0] & 0xf) * 4) - ((tcp[12] >> 4) * 4)) != 0): payload len != 0
+;
+; ipver=4
+; ip and ((ip[0] & 0xf) == 5) and (tcp[14:2] == 512) and ((tcp[12] >> 4) == 5) and ((ip[6] & 0x80) == 0) and ((ip[2:2] - ((ip[0] & 0xf) * 4) - ((tcp[12] >> 4) * 4)) != 0)
+
+l000:
+    ld       #0x0
+l001:
+    ldb      [0]
+l002:
+    and      #0xf
+l003:
+    jeq      #0x5, l004, l033
+l004:
+    ldb      [9]
+l005:
+    jeq      #0x6, l006, l033
+l006:
+    ldh      [6]
+l007:
+    jset     #0x1fff, l033, l008
+l008:
+    ldxb     4*([0]&0xf)
+l009:
+    ldh      [x + 14]
+l010:
+    jeq      #0x200, l011, l033
+l011:
+    ldb      [x + 12]
+l012:
+    rsh      #4
+l013:
+    jeq      #0x5, l014, l033
+l014:
+    ldb      [6]
+l015:
+    jset     #0x80, l033, l016
+l016:
+    ldh      [2]
+l017:
+    st       M[12]
+l018:
+    ldb      [0]
+l019:
+    and      #0xf
+l020:
+    mul      #4
+l021:
+    tax      
+l022:
+    ld       M[12]
+l023:
+    sub      x
+l024:
+    st       M[0]
+l025:
+    ldxb     4*([0]&0xf)
+l026:
+    ldb      [x + 12]
+l027:
+    rsh      #4
+l028:
+    mul      #4
+l029:
+    tax      
+l030:
+    ld       M[0]
+l031:
+    jeq      x, l033, l032
+l032:
+    ret      #65536
+l033:
+    ret      #0

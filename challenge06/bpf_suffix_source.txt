@@ -1,0 +1,34 @@
+    ld #len
+    sub #48
+    tax
+
+     ; matching 5858585858585858585858585858585858585858585858585858585858585858 58585858585858585858585858585858
+     ;         'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+    ld [x + 0]
+    jneq #0x58585858, nomatch
+    ld [x + 4]
+    jneq #0x58585858, nomatch
+    ld [x + 8]
+    jneq #0x58585858, nomatch
+    ld [x + 12]
+    jneq #0x58585858, nomatch
+    ld [x + 16]
+    jneq #0x58585858, nomatch
+    ld [x + 20]
+    jneq #0x58585858, nomatch
+    ld [x + 24]
+    jneq #0x58585858, nomatch
+    ld [x + 28]
+    jneq #0x58585858, nomatch
+    ld [x + 32]
+    jneq #0x58585858, nomatch
+    ld [x + 36]
+    jneq #0x58585858, nomatch
+    ld [x + 40]
+    jneq #0x58585858, nomatch
+    ld [x + 44]
+    jneq #0x58585858, nomatch
+    ret #65535
+
+nomatch:
+    ret #0
