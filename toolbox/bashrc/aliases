@@ -1,0 +1,16 @@
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+alias cd-toolbox='cd $DIR/..'
+alias cd-scripts='cd $DIR/../scripts'
+
+alias resource='. ~/.bashrc'
+alias ll='ls -lah'
+
+alias nmap-scan-network='nmap -sn "$ME/24"'
+alias nmap-scan-host='nmap -A -p-'
+alias nmap-scan-host-fast='nmap -A'
+alias nmap-scan-target='nmap-scan-host $TARGET'
+alias nmap-scan-target-fast='nmap-scan-host-fast $TARGET'
+
+alias gobuster-dirs='gobuster -e -f -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u $TARGET:$TARGET_HTTP'
+alias gobuster-files='gobuster -e -w /usr/share/wordlists/dirb/big.txt -u $TARGET:$TARGET_HTTP'
