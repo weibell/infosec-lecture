@@ -6,6 +6,9 @@ alias cd-scripts='cd $DIR/../scripts'
 alias resource='. ~/.bashrc'
 alias ll='ls -lah'
 
+alias find-patterns='python3 $DIR/../scripts/find_patterns.py'
+alias string-encodings='python3 $DIR/../scripts/string_encodings.py'
+
 alias nmap-scan-network='nmap -sn "$ME/24"'
 alias nmap-scan-host='nmap -A -p-'
 alias nmap-scan-host-fast='nmap -A'
