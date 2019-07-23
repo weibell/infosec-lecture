@@ -6,7 +6,6 @@ If `git`is available:
 
 ```bash
 git clone https://github.com/weibell/infosec-lecture.git
-
 cd infosec-lecture/toolbox/
 ```
 
@@ -14,9 +13,7 @@ Else:
 
 ```bash
 wget https://github.com/weibell/infosec-lecture/archive/master.zip -O infosec-lecture.zip
-
 unzip infosec-lecture.zip
-
 cd infosec-lecture-master/toolbox/
 ```
 
@@ -24,7 +21,6 @@ cd infosec-lecture-master/toolbox/
 
 ```bash
 chmod -R +x .
-
 cd install/
 ./bashrc.sh
 ./tools.sh
