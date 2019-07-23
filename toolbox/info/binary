@@ -1,5 +1,0 @@
-file file
-strings file
-ltrace file
-strace file
-radare2 -A file

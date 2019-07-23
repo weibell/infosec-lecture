@@ -12,12 +12,16 @@ patterns = [
     [b'666c6167', '"flag" in Hex'],
     [b'666C6167', '"flag" in Hex'],
 
+    [b'CTF', '"CTF"'],
+    [b'Q1RG', '"CTF..." in Base64'],
+    [b'435446', '"CTF" in Hex'],
+
     [b'Steg', '"Steg"'],
     [b'steg', '"steg"'],
     [b'U3RlZ', '"Steg..." in Base64'],
     [b'c3RlZ', '"steg..." in Base64'],
-    [b'53746567', '"Steg..." in Hex'],
-    [b'73746567', '"steg..." in Hex'],
+    [b'53746567', '"Steg" in Hex'],
+    [b'73746567', '"steg" in Hex'],
 
     # [b'jpg', '"jpg"'],
     # [b'jpeg', '"jpeg"'],
