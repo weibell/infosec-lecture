@@ -370,4 +370,3 @@ for exploit in avgprob:
 print 	
 print "Finished"
 print bigline
-
