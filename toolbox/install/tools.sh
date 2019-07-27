@@ -6,8 +6,9 @@ sudo apt update
 sudo apt install \
 	htop \
 	idle3 \
-	gobuster \
+	ftp sshfs \
 	ltrace strace \
+	gobuster \
+	wxhexeditor \
 	libimage-exiftool-perl steghide \
-	wxhexeditor
 	

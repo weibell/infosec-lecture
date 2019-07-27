@@ -20,7 +20,6 @@ cd infosec-lecture-master/toolbox/
 ### Install
 
 ```bash
-chmod -R +x .
 cd install/
 ./bashrc.sh
 ./tools.sh

