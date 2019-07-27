@@ -353,6 +353,7 @@ Resources:
 * https://payatu.com/guide-linux-privilege-escalation/
 * https://github.com/AlessandroZ/LaZagne
 * https://github.com/rek7/mXtract
+* https://github.com/DominicBreuker/pspy
 
 
 
