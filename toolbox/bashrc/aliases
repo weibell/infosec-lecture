@@ -5,6 +5,7 @@ alias cd-scripts='cd $DIR/../scripts'
 
 alias resource='. ~/.bashrc'
 alias ll='ls -lah'
+alias ..='cd ..'
 
 alias find-patterns='python3 $DIR/../scripts/find_patterns.py'
 alias string-encodings='python3 $DIR/../scripts/string_encodings.py'
@@ -14,6 +15,3 @@ alias nmap-scan-host='nmap -A -p-'
 alias nmap-scan-host-fast='nmap -A'
 alias nmap-scan-target='nmap-scan-host $TARGET'
 alias nmap-scan-target-fast='nmap-scan-host-fast $TARGET'
-
-alias gobuster-dirs='gobuster -e -f -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u $TARGET:$TARGET_HTTP'
-alias gobuster-files='gobuster -e -w /usr/share/wordlists/dirb/big.txt -u $TARGET:$TARGET_HTTP'

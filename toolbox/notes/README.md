@@ -92,6 +92,7 @@ Resources:
 
 # Good results
 /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+/usr/share/wordlists/dirb/big.txt
 ```
 
 Resources:
@@ -100,19 +101,21 @@ Resources:
 * https://www.owasp.org/index.php/Category:OWASP_DirBuster_Project#The_DirBuster_Lists
 * https://tools.kali.org/web-applications/dirb
 
-#### DirBuster
+#### GoBuster
 
 Examples:
 
 ```bash
-dirbuster -l /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://$TARGET:80
+gobuster dir --expanded --wordlist ~/infosec-lecture/toolbox/misc/wordlist-lecture.txt --url $TARGET:80
+
+gobuster dir --expanded --wordlist /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --addslash --url $TARGET:80
 ```
 
 Resources:
 
-* `dirbuster –h`
-* https://tools.kali.org/web-applications/dirbuster
-* https://www.owasp.org/index.php/Category:OWASP_DirBuster_Project
+* `gobuster dir --help`
+* https://tools.kali.org/web-applications/gobuster
+* https://github.com/OJ/gobuster
 
 
 
@@ -162,6 +165,29 @@ msfconsole
 > set password XYZ
 ```
 
+### SQL injections
+
+#### sqlmap
+
+```bash
+sqlmap -u $TARGET/index.php --data "user=1&password=1" --risk=3
+
+sqlmap -u $TARGET/index.php --data "user=1&password=1" -o --batch --risk=3 --not-string="Incorrect credentials"
+
+... --dbs
+... -D db --tables
+... -D db -T users --columns
+... -D db -T users --dump
+
+```
+
+Resources:
+
+* `sqlmap -h`
+* `sqlmap -hh`
+* https://tools.kali.org/vulnerability-analysis/sqlmap
+* https://github.com/sqlmapproject/sqlmap/wiki/Usage
+
 ### Password attacks
 
 #### CeWL
@@ -191,6 +217,12 @@ Examples:
 
 ```bash
 john --wordlist=wordlist.txt --rules:WordpressCustom --stdout > wordlist2.txt
+
+unshadow passwd shadow > password.txt
+john password.txt
+
+putty2john private_root_key.ppk > p2j.txt
+john --wordlist=wordlist.txt p2j.txt
 ```
 
 Resources:
@@ -202,18 +234,12 @@ Resources:
 
 #### THC-Hydra
 
-Examples:
-
-```bash
-TODO
-```
-
 Resources:
 
 * `hydra`
 * `hydra -h`
 * https://tools.kali.org/password-attacks/hydra
-* freeworld.thc.org/thc-hydra/
+* https://github.com/vanhauser-thc/thc-hydra
 
 ### Interactive shells
 
