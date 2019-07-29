@@ -6,7 +6,7 @@ sudo apt update
 sudo apt install \
 	htop \
 	idle3 \
-	ftp sshfs \
+	ftp sshfs cifs-utils \
 	ltrace strace \
 	gobuster \
 	wxhexeditor \
