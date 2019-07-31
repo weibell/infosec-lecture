@@ -2,16 +2,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 alias cd-toolbox='cd $DIR/..'
 alias cd-scripts='cd $DIR/../scripts'
+alias cd-misc='cd $DIR/../misc'
 
 alias resource='. ~/.bashrc'
 alias ll='ls -lah'
 alias ..='cd ..'
-
-alias find-patterns='python3 $DIR/../scripts/find_patterns.py'
-alias string-encodings='python3 $DIR/../scripts/string_encodings.py'
-
-alias nmap-scan-network='nmap -sn "$ME/24"'
-alias nmap-scan-host='nmap -A -p-'
-alias nmap-scan-host-fast='nmap -A'
-alias nmap-scan-target='nmap-scan-host $TARGET'
-alias nmap-scan-target-fast='nmap-scan-host-fast $TARGET'

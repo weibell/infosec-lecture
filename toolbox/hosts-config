@@ -1,5 +1,2 @@
-# IP addresses
 ME=$(hostname -I | xargs)
-KALI=$ME
-
 TARGET=192.168.x.x
