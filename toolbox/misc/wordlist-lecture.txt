@@ -13,6 +13,7 @@ backup.zip
 wordpress/
 blog/
 wp/
+users.sql
 flag
 flag0
 flag1

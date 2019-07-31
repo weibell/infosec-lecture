@@ -22,6 +22,8 @@ nmap -sn "$ME/24"
 TARGET=192.168..#
 
 # Target scan
+nmap -v $TARGET
+nmap -v -p- $TARGET
 nmap -A -p- $TARGET
 ```
 
@@ -32,6 +34,20 @@ Resources:
 * https://nmap.org/book/man.html
 
 ### Web server scanning
+
+#### Raccoon
+
+Examples:
+
+```bash
+raccoon $TARGET
+raccoon --full-scan --port 1-65535 $TARGET
+```
+
+Resources:
+
+* `raccoon --help`
+* https://github.com/evyatarmeged/Raccoon
 
 #### Nikto2
 
@@ -108,7 +124,7 @@ Examples:
 ```bash
 gobuster dir --expanded --wordlist ~/infosec-lecture/toolbox/misc/wordlist-lecture.txt --url $TARGET:80
 
-gobuster dir --expanded --wordlist /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --addslash --url $TARGET:80
+gobuster dir --expanded --wordlist /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --addslash -x php,txt,sql --url http://$TARGET:80
 ```
 
 Resources:
