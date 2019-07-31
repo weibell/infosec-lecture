@@ -413,14 +413,23 @@ reset
 stty rows 24 cols 80
 ```
 
+### SMB
+
+Examples:
+
+```bash
+smbmap -H $TARGET
+smbmap -H $TARGET -R
+smbclient -L //$TARGET
+enum4linux $TARGET
+```
+
 ### Bash tools
 
 ```bash
 bind 'set completion-ignore-case on'
 alias ll="ls -lah"
 ```
-
-
 
 ### String-related resources
 
@@ -433,6 +442,10 @@ alias ll="ls -lah"
   * https://md5decrypt.net/en/
   * https://hashkiller.co.uk/Cracker/MD5
 
+### Other resources
+
+* https://highon.coffee/blog/penetration-testing-tools-cheat-sheet/
+
 ### Kali settings
 
 * Settings
@@ -441,3 +454,4 @@ alias ll="ls -lah"
 * Dash to Dock settings 
   * Panel mode: extend to the screen edge
   * Intelligent autohide: off
+
