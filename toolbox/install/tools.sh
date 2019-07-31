@@ -11,4 +11,5 @@ sudo apt install \
 	gobuster \
 	wxhexeditor \
 	libimage-exiftool-perl steghide \
-	
+
+pip3 install raccoon-scanner
